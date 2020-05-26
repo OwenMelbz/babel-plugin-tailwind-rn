@@ -4,7 +4,7 @@ This is not production ready, is just a proof of concept currently.
 
 # Installation
 
-- `yarn install https://github.com/OwenMelbz/babel-plugin-tailwind-rn.git`
+- `yarn add https://github.com/OwenMelbz/babel-plugin-tailwind-rn.git`
 
 - `babel.config.js` add the plugin `tailwind-rn` e.g. `plugins: ['tailwind-rn']`
 
