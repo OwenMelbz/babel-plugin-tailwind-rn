@@ -33,7 +33,7 @@ function App() {
 
 ## Updating Config
 
-If you make a change to the tailwind.config.js you will need to cancel your metro bundler and boot it up again
+If you make a change to the `tailwind.config.js` you will need to cancel your metro bundler and boot it up again
 
 ## CSS Variables
 
