@@ -31,6 +31,10 @@ function App() {
 
 # Important Notes
 
+## Updating Config
+
+If you make a change to the tailwind.config.js you will need to cancel your metro bundler and boot it up again
+
 ## CSS Variables
 
 Due to Tailwind 1.4 using CSS variables this messes up react native. This means we need to run Tailwind in IE11 mode.
@@ -52,9 +56,3 @@ module.exports = {
   plugins: [],
 }
 ````
-
-
-## Updating Config
-
-If you make a change to the tailwind.config.js you will need to cancel your metro bundler and boot it up again
-
