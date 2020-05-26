@@ -1,4 +1,5 @@
-import React, { useEffect, useState, Dimensions } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Dimensions } from 'react-native';
 import styles from 'babel-plugin-tailwind-rn/dist/styles.json';
 import screens from 'babel-plugin-tailwind-rn/dist/screens.json';
 

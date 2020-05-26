@@ -4,6 +4,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactNative = require("react-native");
+
 var _styles = _interopRequireDefault(require("babel-plugin-tailwind-rn/dist/styles.json"));
 
 var _screens = _interopRequireDefault(require("babel-plugin-tailwind-rn/dist/screens.json"));
@@ -33,8 +35,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function getWidth() {
-  if (_react.Dimensions) {
-    return _react.Dimensions.get('window').width;
+  if (_reactNative.Dimensions) {
+    return _reactNative.Dimensions.get('window').width;
   }
 
   if (window) {
@@ -43,8 +45,8 @@ function getWidth() {
 }
 
 function bindResize(callback) {
-  if (_react.Dimensions) {
-    return _react.Dimensions.addEventListener('change', callback);
+  if (_reactNative.Dimensions) {
+    return _reactNative.Dimensions.addEventListener('change', callback);
   }
 
   if (window) {
@@ -53,8 +55,8 @@ function bindResize(callback) {
 }
 
 function unbindResize(callback) {
-  if (_react.Dimensions) {
-    return _react.Dimensions.removeEventListener('change', callback);
+  if (_reactNative.Dimensions) {
+    return _reactNative.Dimensions.removeEventListener('change', callback);
   }
 
   if (window) {
