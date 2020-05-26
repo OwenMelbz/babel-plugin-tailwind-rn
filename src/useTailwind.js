@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Dimensions } from 'react';
-import styles from 'babel-plugin-tailwindcss-rn/dist/styles.json';
-import screens from 'babel-plugin-tailwindcss-rn/dist/screens.json';
+import styles from 'babel-plugin-tailwind-rn/dist/styles.json';
+import screens from 'babel-plugin-tailwind-rn/dist/screens.json';
 
 function getWidth() {
     if (Dimensions) {

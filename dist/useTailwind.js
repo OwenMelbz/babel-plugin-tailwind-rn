@@ -4,9 +4,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _styles = _interopRequireDefault(require("babel-plugin-tailwindcss-rn/dist/styles.json"));
+var _styles = _interopRequireDefault(require("babel-plugin-tailwind-rn/dist/styles.json"));
 
-var _screens = _interopRequireDefault(require("babel-plugin-tailwindcss-rn/dist/screens.json"));
+var _screens = _interopRequireDefault(require("babel-plugin-tailwind-rn/dist/screens.json"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
