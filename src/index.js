@@ -142,7 +142,7 @@ postcss([tailwind])
 .process(source, {from: undefined})
 .then(({css}) => {
     const styles = build(css);
-    fs.writeFileSync('node_modules/babel-plugin-tailwindcss-rn/dist/styles.json', JSON.stringify(styles, null, '\t'));
+    fs.writeFileSync('node_modules/babel-plugin-tailwind-rn/dist/styles.json', JSON.stringify(styles, null, '\t'));
 })
 .catch(error => {
     console.error('> Error occurred while generating styles');
@@ -151,13 +151,13 @@ postcss([tailwind])
 });
 
 fs.writeFileSync(
-    'node_modules/babel-plugin-tailwindcss-rn/dist/screens.json',
+    'node_modules/babel-plugin-tailwind-rn/dist/screens.json',
     JSON.stringify(config().theme.screens, null, '\t')
 )
 
 module.exports = ({ types: t }) => {
     return {
-        name: 'tailwindcss-rn',
+        name: 'tailwind-rn',
         visitor: {
             // JSXAttribute(path, state) {
             //     if (path.node.name.name === 'className') {
@@ -167,7 +167,7 @@ module.exports = ({ types: t }) => {
             // Program: {
             //     exit(path, state) {
             //         if (state.shouldImport) {
-            //             path.unshiftContainer('body', t.importDeclaration([], t.stringLiteral('babel-plugin-tailwindcss-rn/dist/useTailwind')))
+            //             path.unshiftContainer('body', t.importDeclaration([], t.stringLiteral('babel-plugin-tailwind-rn/dist/useTailwind')))
             //         }
             //     }
             // },

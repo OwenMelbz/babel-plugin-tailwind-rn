@@ -4,11 +4,11 @@ This is not production ready, is just a proof of concept currently.
 
 # Installation
 
-- `yarn install git@github.com:OwenMelbz/babel-plugin-tailwind-rn.git`
+- `yarn install https://github.com/OwenMelbz/babel-plugin-tailwind-rn.git`
 
 - `babel.config.js` add the plugin `tailwind-rn` e.g. `plugins: ['tailwind-rn']`
 
-- Import to your App.js `import 'babel-plugin-tailwindcss-rn/dist/useTailwind'` (hoping to automate this later)
+- Import to your App.js `import 'babel-plugin-tailwind-rn/dist/useTailwind'` (hoping to automate this later)
 
 # Usage
 
@@ -20,7 +20,7 @@ You do this by importing the hook into your entry file e.g. App.js
 import React from 'react';
 
 // Add this!
-import 'babel-plugin-tailwindcss-rn/dist/useTailwind'
+import 'babel-plugin-tailwind-rn/dist/useTailwind'
 ```
 
 Then use the normal react syntax!
