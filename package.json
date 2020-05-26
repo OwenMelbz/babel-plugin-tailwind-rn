@@ -1,0 +1,40 @@
+{
+  "name": "babel-plugin-tailwind-rn",
+  "version": "0.0.0",
+  "description": "Allows you to use className='w-full md:w-1/2' syntax in your react native projects. ",
+  "license": "MIT",
+  "repository": "owenmelbz/tailwindcss-rn",
+  "author": "Owen Melbourne <owenmelbz@gmail.com>",
+  "engines": {
+    "node": ">=4"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "babel src -d dist --ignore *.test.js,__fixtures__",
+    "prepublish": "npm run build",
+    "fmt": "prettier --write '**/*.{js,json}'",
+    "lint": "eslint src"
+  },
+  "keywords": [
+    "babel",
+    "babel-plugin",
+    "react-native",
+    "tailwind"
+  ],
+  "dependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "css": "^2.2.4",
+    "css-to-react-native": "^3.0.0",
+    "eslint": "^7.1.0",
+    "eslint-config-precure": "^5.4.0",
+    "flow-bin": "^0.125.1",
+    "postcss": "^7.0.31",
+    "prettier": "^2.0.5",
+    "tailwindcss": "^1.4.6"
+  }
+}
