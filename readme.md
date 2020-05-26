@@ -8,8 +8,6 @@ This is not production ready, is just a proof of concept currently.
 
 - `babel.config.js` add the plugin `tailwind-rn` e.g. `plugins: ['tailwind-rn']`
 
-- Import to your App.js `import 'babel-plugin-tailwind-rn/dist/useTailwind'` (hoping to automate this later)
-
 # Usage
 
 We need to boot up the tailwind hook (until I figure out how to automate).
