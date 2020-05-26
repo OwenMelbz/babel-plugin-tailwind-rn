@@ -14,21 +14,21 @@ function getWidth() {
 
 function bindResize(callback) {
     if (Dimensions) {
-        Dimensions.addEventListener('change', callback)
+        return Dimensions.addEventListener('change', callback)
     }
 
     if (window) {
-        window.addEventListener('resize', callback)
+        return window.addEventListener('resize', callback)
     }
 }
 
 function unbindResize(callback) {
     if (Dimensions) {
-        Dimensions.removeEventListener('change', callback)
+        return Dimensions.removeEventListener('change', callback)
     }
 
     if (window) {
-        window.removeEventListener('resize', callback)
+        return window.removeEventListener('resize', callback)
     }
 }
 

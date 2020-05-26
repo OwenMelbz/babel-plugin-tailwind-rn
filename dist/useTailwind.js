@@ -44,21 +44,21 @@ function getWidth() {
 
 function bindResize(callback) {
   if (_react.Dimensions) {
-    _react.Dimensions.addEventListener('change', callback);
+    return _react.Dimensions.addEventListener('change', callback);
   }
 
   if (window) {
-    window.addEventListener('resize', callback);
+    return window.addEventListener('resize', callback);
   }
 }
 
 function unbindResize(callback) {
   if (_react.Dimensions) {
-    _react.Dimensions.removeEventListener('change', callback);
+    return _react.Dimensions.removeEventListener('change', callback);
   }
 
   if (window) {
-    window.removeEventListener('resize', callback);
+    return window.removeEventListener('resize', callback);
   }
 }
 
