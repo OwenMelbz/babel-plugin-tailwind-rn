@@ -28,3 +28,32 @@ function App() {
 	return <Text class="text-md lg:text-xl"></Text>
 }
 ```
+
+# Important Notes
+
+## CSS Variables
+
+Due to Tailwind 1.4 using CSS variables this messes up react native. This means we need to run Tailwind in IE11 mode.
+
+You can do that by generating a config and setting the `target` to `ie11` e.g.
+
+Generate the config with `npx tailwind init`
+
+Set the target to ie11 e.g.
+
+```js
+module.exports = {
+  purge: [],
+  target: 'ie11',
+  theme: {
+    extend: {},
+  },
+  variants: {},
+  plugins: [],
+}
+````
+
+## Updating Config
+
+If you make a change to the tailwind.config.js you will need to cancel your metro bundler and boot it up again
+
