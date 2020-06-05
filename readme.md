@@ -48,3 +48,7 @@ You can download an example project which uses Expo to see how it works
 https://github.com/OwenMelbz/tailwind-rn-example
 
 The specific commit with the changes are visible is: https://github.com/OwenMelbz/tailwind-rn-example/commit/f7f361bf07d026e4b57a80614cf13735e3eeda43
+
+## Disclaimer
+
+Code heavily influenced from: https://github.com/vadimdemedes/tailwind-rn as well as some glorious copy/paste of the class validation utilities!
