@@ -1,12 +1,12 @@
 "use strict";
 
-function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-var css = require('css');
+var cssBuilder = require('css');
 
 var cssToReactNative = require('css-to-react-native')["default"];
 
@@ -101,8 +101,8 @@ var isUtilitySupported = function isUtilitySupported(utility) {
 };
 
 var build = function build(source) {
-  var _css$parse = css.parse(source),
-      stylesheet = _css$parse.stylesheet; // Mapping of Tailwind class names to React Native styles
+  var _cssBuilder$parse = cssBuilder.parse(source),
+      stylesheet = _cssBuilder$parse.stylesheet; // Mapping of Tailwind class names to React Native styles
 
 
   var styles = {};
@@ -154,36 +154,27 @@ var build = function build(source) {
 };
 
 var source = "\n@tailwind base;\n@tailwind components;\n@tailwind utilities;\n";
-postcss([tailwind]).process(source, {
+console.log(config);
+postcss([tailwind(config)]).process(source, {
   from: undefined
 }).then(function (_ref3) {
   var css = _ref3.css;
   var styles = build(css);
-  fs.writeFileSync('node_modules/babel-plugin-tailwind-rn/dist/styles.json', JSON.stringify(styles, null, '\t'));
+  fs.writeFileSync(__dirname + '/styles.json', JSON.stringify(styles, null, '\t'));
 })["catch"](function (error) {
-  console.error('> Error occurred while generating styles');
+  // eslint-disable-next-line no-console
+  console.error('> Error occurred while generating styles'); // eslint-disable-next-line no-console
+
   console.error(error.stack);
   process.exit(1);
 });
-fs.writeFileSync('node_modules/babel-plugin-tailwind-rn/dist/screens.json', JSON.stringify(config().theme.screens, null, '\t'));
+fs.writeFileSync(__dirname + '/screens.json', JSON.stringify(config().theme.screens, null, '\t'));
 
 module.exports = function (_ref4) {
   var t = _ref4.types;
   return {
     name: 'tailwind-rn',
     visitor: {
-      // JSXAttribute(path, state) {
-      //     if (path.node.name.name === 'className') {
-      //         state.shouldImport = true
-      //     }
-      // },
-      // Program: {
-      //     exit(path, state) {
-      //         if (state.shouldImport) {
-      //             path.unshiftContainer('body', t.importDeclaration([], t.stringLiteral('babel-plugin-tailwind-rn/dist/useTailwind')))
-      //         }
-      //     }
-      // },
       JSXOpeningElement: function JSXOpeningElement(path) {
         var classNameAttribute = null;
         var existingStyleAttribute = null;

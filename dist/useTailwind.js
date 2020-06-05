@@ -6,9 +6,9 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactNative = require("react-native");
 
-var _styles = _interopRequireDefault(require("babel-plugin-tailwind-rn/dist/styles.json"));
+var _styles = _interopRequireDefault(require("./styles.json"));
 
-var _screens = _interopRequireDefault(require("babel-plugin-tailwind-rn/dist/screens.json"));
+var _screens = _interopRequireDefault(require("./screens.json"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -34,34 +34,28 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function getWidth() {
+var getWidth = function getWidth() {
   if (_reactNative.Dimensions) {
     return _reactNative.Dimensions.get('window').width;
   }
 
-  if (window) {
-    return window.innerWidth;
-  }
-}
+  return window.innerWidth;
+};
 
-function bindResize(callback) {
+var bindResize = function bindResize(callback) {
   if (_reactNative.Dimensions) {
     return _reactNative.Dimensions.addEventListener('change', callback);
   }
 
-  if (window) {
-    return window.addEventListener('resize', callback);
-  }
-}
+  return window.addEventListener('resize', callback);
+};
 
 function unbindResize(callback) {
   if (_reactNative.Dimensions) {
     return _reactNative.Dimensions.removeEventListener('change', callback);
   }
 
-  if (window) {
-    return window.removeEventListener('resize', callback);
-  }
+  return window.removeEventListener('resize', callback);
 }
 
 function getStyles(string) {
@@ -71,13 +65,13 @@ function getStyles(string) {
   classes.forEach(function (name) {
     style = _objectSpread(_objectSpread({}, style), _styles["default"][name]);
 
-    if (name.indexOf(':') !== -1) {
+    if (name.includes(':')) {
       var _name$split = name.split(':'),
           _name$split2 = _slicedToArray(_name$split, 2),
           size = _name$split2[0],
           utility = _name$split2[1];
 
-      var breakpoint = parseInt(_screens["default"][size]);
+      var breakpoint = Number.parseInt(_screens["default"][size]);
 
       if (width >= breakpoint) {
         style = _objectSpread(_objectSpread({}, style), _styles["default"][utility]);
@@ -90,7 +84,6 @@ function getStyles(string) {
 function useTailwind(string) {
   var _useState = (0, _react.useState)(getWidth()),
       _useState2 = _slicedToArray(_useState, 2),
-      width = _useState2[0],
       setWidth = _useState2[1];
 
   (0, _react.useEffect)(function () {
@@ -98,16 +91,12 @@ function useTailwind(string) {
       setWidth(getWidth());
     }
 
-    bindResize();
+    bindResize(update);
     return function () {
-      return unbindResize();
+      return unbindResize(update);
     };
   });
   return getStyles(string);
 }
 
-if (!global) {
-  console.error('Cannot find "global" namespace to attach to...');
-} else {
-  global.useTailwind = useTailwind;
-}
+global.useTailwind = useTailwind;

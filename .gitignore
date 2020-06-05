@@ -1,5 +1,6 @@
 node_modules
 coverage
-dist/screens.json
-dist/styles.json
+screens.json
+styles.json
 .idea
+yarn-error.log
