@@ -25,7 +25,7 @@ Then use the normal react syntax!
 
 ```jsx
 function App() {
-    return <Text class="text-md lg:text-xl"></Text>
+    return <Text className="text-md lg:text-xl"></Text>
 }
 ```
 
