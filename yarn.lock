@@ -1562,6 +1562,13 @@ babel-plugin-syntax-trailing-function-commas@^7.0.0-beta.0:
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-trailing-function-commas/-/babel-plugin-syntax-trailing-function-commas-7.0.0-beta.0.tgz#aa213c1435e2bffeb6fca842287ef534ad05d5cf"
   integrity sha512-Xj9XuRuz3nTSbaTXWv3itLOcxyF4oPD8douBBmj7U9BBC6nEBYfyOJYQMf/8PJAFotC62UY5dFfIGEPr7WswzQ==
 
+"babel-plugin-tailwind-rn@https://github.com/OwenMelbz/babel-plugin-tailwind-rn.git":
+  version "1.0.0"
+  resolved "https://github.com/OwenMelbz/babel-plugin-tailwind-rn.git#24338bb6017c838907b3885946aae3024d03b4c7"
+  dependencies:
+    css "^2.2.4"
+    css-to-react-native "^3.0.0"
+
 babel-preset-fbjs@^3.2.0, babel-preset-fbjs@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/babel-preset-fbjs/-/babel-preset-fbjs-3.3.0.tgz#a6024764ea86c8e06a22d794ca8b69534d263541"

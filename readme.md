@@ -1,18 +1,22 @@
 # React Native Tailwind CSS
 
-This is not production ready, is just a proof of concept currently.
+When a babel plugin, and react hook has a baby. You end up with this! A way that allows you to use Tailwind CSS within your React Native project via the familiar `className` property!
 
 # Installation
 
-- `yarn add https://github.com/OwenMelbz/babel-plugin-tailwind-rn.git`
+- `yarn add babel-plugin-tailwind-rn`
 
 - `babel.config.js` add the plugin `tailwind-rn` e.g. `plugins: ['tailwind-rn']`
 
 # Usage
 
-We need to boot up the tailwind hook (until I figure out how to automate).
+When Metro/Webpack boots up, it runs your apps javascript through babel.
 
-You do this by importing the hook into your entry file e.g. App.js
+We hook into this process converting your `className="text-xl"` props into `style={useTailwind("text-xl")}`
+
+This means we're able to add listeners on the resize events and dynamically update your styles based off the responsive Tailwind classes.
+
+As `useTailwind()` isn't in your project, you'll need to import the hook into your entry file e.g. `App.js` - You'll need to do this before you use any Tailwind classes.
 
 ```js
 import React from 'react';
@@ -35,24 +39,10 @@ function App() {
 
 If you make a change to the `tailwind.config.js` you will need to cancel your metro bundler and boot it up again
 
-## CSS Variables
+# Example Project
 
-Due to Tailwind 1.4 using CSS variables this messes up react native. This means we need to run Tailwind in IE11 mode.
+You can download an example project which uses Expo to see how it works
 
-You can do that by generating a config and setting the `target` to `ie11` e.g.
+https://github.com/OwenMelbz/tailwind-rn-example
 
-Generate the config with `npx tailwind init`
-
-Set the target to ie11 e.g.
-
-```js
-module.exports = {
-  purge: [],
-  target: 'ie11',
-  theme: {
-    extend: {},
-  },
-  variants: {},
-  plugins: [],
-}
-````
+The specific commit with the changes are visible is: https://github.com/OwenMelbz/tailwind-rn-example/commit/f7f361bf07d026e4b57a80614cf13735e3eeda43
