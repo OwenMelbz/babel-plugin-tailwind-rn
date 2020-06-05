@@ -17,6 +17,10 @@ var postcss = require('postcss');
 var tailwind = require('tailwindcss');
 
 var config = require('tailwindcss/resolveConfig');
+/*
+ * All this crazy logic belongs to: https://github.com/vadimdemedes/tailwind-rn
+ */
+
 
 var remToPx = function remToPx(value) {
   return "".concat(Number.parseFloat(value) * 16, "px");
@@ -152,15 +156,20 @@ var build = function build(source) {
   };
   return styles;
 };
+/*
+ * Now we're back in babel land.
+ */
+
 
 var source = "\n@tailwind base;\n@tailwind components;\n@tailwind utilities;\n";
-console.log(config);
-postcss([tailwind(config)]).process(source, {
+var tailwindConfig = config();
+tailwindConfig.target = 'ie11';
+postcss([tailwind(tailwindConfig)]).process(source, {
   from: undefined
 }).then(function (_ref3) {
   var css = _ref3.css;
   var styles = build(css);
-  fs.writeFileSync(__dirname + '/styles.json', JSON.stringify(styles, null, '\t'));
+  fs.writeFileSync("".concat(__dirname, "/styles.json"), JSON.stringify(styles, null, '\t'));
 })["catch"](function (error) {
   // eslint-disable-next-line no-console
   console.error('> Error occurred while generating styles'); // eslint-disable-next-line no-console
@@ -168,7 +177,7 @@ postcss([tailwind(config)]).process(source, {
   console.error(error.stack);
   process.exit(1);
 });
-fs.writeFileSync(__dirname + '/screens.json', JSON.stringify(config().theme.screens, null, '\t'));
+fs.writeFileSync("".concat(__dirname, "/screens.json"), JSON.stringify(config().theme.screens, null, '\t'));
 
 module.exports = function (_ref4) {
   var t = _ref4.types;
