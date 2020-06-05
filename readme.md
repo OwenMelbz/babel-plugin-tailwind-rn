@@ -2,6 +2,8 @@
 
 When a babel plugin, and react hook has a baby. You end up with this! A way that allows you to use Tailwind CSS within your React Native project via the familiar `className` property!
 
+<img src="https://raw.githubusercontent.com/OwenMelbz/babel-plugin-tailwind-rn/master/screenshot.png" alt="screenshot" />
+
 # Installation
 
 - `yarn add babel-plugin-tailwind-rn`
