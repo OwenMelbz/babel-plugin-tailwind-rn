@@ -1,3 +1,13 @@
+try {
+  require('tailwindcss')
+} catch (e) {
+  throw new Error(`
+    The tailwind-rn plugin requires Tailwind:
+    - run 'yarn add tailwindcss'
+    - restart metro with '--reset-cache'
+  `)
+}
+
 const cssBuilder = require('css')
 const cssToReactNative = require('css-to-react-native').default
 const fs = require('fs')
