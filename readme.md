@@ -52,3 +52,5 @@ The specific commit with the changes are visible is: https://github.com/OwenMelb
 ## Disclaimer
 
 Code heavily influenced from: https://github.com/vadimdemedes/tailwind-rn as well as some glorious copy/paste of the class validation utilities!
+
+Also thanks to Brad from Discord... I don't know who you are, or where you came from. But thanks for Babel support!
