@@ -6,6 +6,12 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+try {
+  require('tailwindcss');
+} catch (e) {
+  throw new Error("\n    The tailwind-rn plugin requires Tailwind:\n    - run 'yarn add tailwindcss'\n    - restart metro with '--reset-cache'\n  ");
+}
+
 var cssBuilder = require('css');
 
 var cssToReactNative = require('css-to-react-native')["default"];
