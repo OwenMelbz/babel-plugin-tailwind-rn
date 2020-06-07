@@ -14,6 +14,7 @@ const fs = require('fs')
 const postcss = require('postcss')
 const tailwind = require('tailwindcss')
 const config = require('tailwindcss/resolveConfig')
+const useTailwind = require('./useTailwind');
 
 /*
  * All this crazy logic belongs to: https://github.com/vadimdemedes/tailwind-rn
@@ -229,3 +230,5 @@ module.exports = ({ types: t }) => ({
     },
   },
 })
+
+module.exports.useTailwind = useTailwind

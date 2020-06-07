@@ -23,6 +23,8 @@ var postcss = require('postcss');
 var tailwind = require('tailwindcss');
 
 var config = require('tailwindcss/resolveConfig');
+
+var useTailwind = require('./useTailwind');
 /*
  * All this crazy logic belongs to: https://github.com/vadimdemedes/tailwind-rn
  */
@@ -224,3 +226,5 @@ module.exports = function (_ref4) {
     }
   };
 };
+
+module.exports.useTailwind = useTailwind;
