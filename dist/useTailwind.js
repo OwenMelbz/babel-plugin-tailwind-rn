@@ -1,6 +1,13 @@
 "use strict";
 
-var _react = require("react");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
 
 var _reactNative = require("react-native");
 
@@ -9,6 +16,12 @@ var _styles = _interopRequireDefault(require("./styles.json"));
 var _screens = _interopRequireDefault(require("./screens.json"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -28,21 +41,37 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var getWidth = function getWidth() {
+function debounce(func, wait) {
+  var timeout;
+  return function () {
+    var context = this;
+    var args = arguments;
+
+    var later = function later() {
+      timeout = null;
+      func.apply(context, args);
+    };
+
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+function getWidth() {
   if (_reactNative.Dimensions) {
     return _reactNative.Dimensions.get('window').width;
   }
 
   return window.innerWidth;
-};
+}
 
-var bindResize = function bindResize(callback) {
+function bindResize(callback) {
   if (_reactNative.Dimensions) {
     return _reactNative.Dimensions.addEventListener('change', callback);
   }
 
   return window.addEventListener('resize', callback);
-};
+}
 
 function unbindResize(callback) {
   if (_reactNative.Dimensions) {
@@ -75,22 +104,30 @@ function getStyles(string) {
   return style;
 }
 
-function useTailwind(string) {
-  var _useState = (0, _react.useState)(getWidth()),
-      _useState2 = _slicedToArray(_useState, 2),
-      setWidth = _useState2[1];
+var withTailwind = function withTailwind(Component) {
+  return function (props) {
+    var _useState = (0, _react.useState)(getWidth()),
+        _useState2 = _slicedToArray(_useState, 2),
+        width = _useState2[0],
+        setWidth = _useState2[1];
 
-  (0, _react.useEffect)(function () {
-    function update() {
-      setWidth(getWidth());
-    }
+    (0, _react.useEffect)(function () {
+      function update() {
+        setWidth(getWidth());
+      }
 
-    bindResize(update);
-    return function () {
-      return unbindResize(update);
-    };
-  });
-  return getStyles(string);
-}
+      var debounced = debounce(update, 200);
+      bindResize(debounced);
+      return function () {
+        return unbindResize(debounced);
+      };
+    });
+    return /*#__PURE__*/_react["default"].createElement(Component, _extends({}, props, {
+      windowWidth: width
+    }));
+  };
+};
 
-global.useTailwind = useTailwind;
+var _default = withTailwind;
+exports["default"] = _default;
+global.useTailwind = getStyles;

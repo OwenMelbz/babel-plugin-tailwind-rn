@@ -1,9 +1,27 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Dimensions } from 'react-native'
 import styles from './styles.json'
 import screens from './screens.json'
 
-const getWidth = () => {
+function debounce(func, wait) {
+  let timeout
+
+  return function () {
+    const context = this
+    const args = arguments
+
+    const later = function () {
+      timeout = null
+      func.apply(context, args)
+    }
+
+    clearTimeout(timeout)
+
+    timeout = setTimeout(later, wait)
+  }
+}
+
+function getWidth() {
   if (Dimensions) {
     return Dimensions.get('window').width
   }
@@ -11,7 +29,7 @@ const getWidth = () => {
   return window.innerWidth
 }
 
-const bindResize = (callback) => {
+function bindResize(callback) {
   if (Dimensions) {
     return Dimensions.addEventListener('change', callback)
   }
@@ -48,20 +66,24 @@ function getStyles(string) {
   return style
 }
 
-function useTailwind(string) {
-  const [, setWidth] = useState(getWidth())
+const withTailwind = (Component) => (props) => {
+  const [width, setWidth] = useState(getWidth())
 
   useEffect(() => {
     function update() {
       setWidth(getWidth())
     }
 
-    bindResize(update)
+    const debounced = debounce(update, 200)
 
-    return () => unbindResize(update)
+    bindResize(debounced)
+
+    return () => unbindResize(debounced)
   })
 
-  return getStyles(string)
+  return <Component {...props} windowWidth={width} />
 }
 
-global.useTailwind = useTailwind
+export default withTailwind
+
+global.useTailwind = getStyles
