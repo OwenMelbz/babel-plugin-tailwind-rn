@@ -1,4 +1,4 @@
-# React Native Tailwind CSS
+# React Native Tailwind CSS v2
 
 When a babel plugin, and react hook has a baby. You end up with this! A way that allows you to use Tailwind CSS within your React Native project via the familiar `className` property!
 

@@ -43,9 +43,9 @@
     "css-to-react-native": "^3.0.0"
   },
   "peerDependencies": {
-    "postcss": "^7.0.32",
-    "react": "^16.13.1",
-    "react-native": "^0.62.2",
-    "tailwindcss": "^1.4.6"
+    "postcss": "^7",
+    "react": "^16",
+    "react-native": "^0",
+    "tailwindcss": "^1.4"
   }
 }

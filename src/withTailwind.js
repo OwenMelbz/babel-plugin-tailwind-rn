@@ -66,7 +66,7 @@ function getStyles(string) {
   return style
 }
 
-const withTailwind = (Component) => (props) => {
+const TailwindProvider = (WrappedComponent) => (props) => {
   const [width, setWidth] = useState(getWidth())
 
   useEffect(() => {
@@ -81,9 +81,9 @@ const withTailwind = (Component) => (props) => {
     return () => unbindResize(debounced)
   })
 
-  return <Component {...props} windowWidth={width} />
+  return <WrappedComponent {...props} windowWidth={ width } />
 }
 
-export default withTailwind
+export default TailwindProvider;
 
 global.useTailwind = getStyles
