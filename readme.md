@@ -18,20 +18,23 @@ We hook into this process converting your `className="text-xl"` props into `styl
 
 This means we're able to add listeners on the resize events and dynamically update your styles based off the responsive Tailwind classes.
 
-As `useTailwind()` isn't in your project, you'll need to import the hook into your entry file e.g. `App.js` - You'll need to do this before you use any Tailwind classes.
+To provide your components with the correct classes, you'll need to wrap your `App` with our HOC, this is your root-most component.
 
 ```js
-import React from 'react';
+import useTailwind from 'babel-plugin-tailwind-rn/dist/useTailwind'
 
-// Add this!
-import 'babel-plugin-tailwind-rn/dist/useTailwind'
+function App() {
+    return <Text>My Tailwind App!</Text>
+}
+
+export default useTailwind(App)
 ```
 
 Then use the normal react syntax!
 
 ```jsx
 function App() {
-    return <Text className="text-md lg:text-xl"></Text>
+    return <Text className="text-md lg:text-xl">My Tailwind App!</Text>
 }
 ```
 
@@ -46,8 +49,6 @@ If you make a change to the `tailwind.config.js` you will need to cancel your me
 You can download an example project which uses Expo to see how it works
 
 https://github.com/OwenMelbz/tailwind-rn-example
-
-The specific commit with the changes are visible is: https://github.com/OwenMelbz/tailwind-rn-example/commit/f7f361bf07d026e4b57a80614cf13735e3eeda43
 
 ## Disclaimer
 
