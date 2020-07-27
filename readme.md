@@ -1,8 +1,14 @@
-# React Native Tailwind CSS
+# React Native Tailwind CSS v2
 
 When a babel plugin, and react hook has a baby. You end up with this! A way that allows you to use Tailwind CSS within your React Native project via the familiar `className` property!
 
 <img src="https://raw.githubusercontent.com/OwenMelbz/babel-plugin-tailwind-rn/318682dcbe9ccb391b76e60ada5590c9153e9b17/screenshot.png" alt="screenshot" />
+
+# Changes since v1
+
+The architecture around v1 focused on using hooks within each component, however React doesn't support a dynamic number of hooks, which means if the number or rows, views etc changed it would throw an error.
+
+The internals for the react side of v2 have been changed to an HOC which stores the state only once, then passes it down to each component by wrapping your layout level component (often the `App`) with our `useTailwind` function.
 
 # Installation
 
@@ -42,7 +48,11 @@ function App() {
 
 ## Updating Config
 
-If you make a change to the `tailwind.config.js` you will need to cancel your metro bundler and boot it up again
+Metro uses heavy caching to speed up your builds, this means it holds your tailwind config in memory on the device/simulator.
+
+Once you've made changes to your `tailwind.config.js` You need to clear the metro cache, often with `shift + r` which reloads with fresh cache.
+
+However that only refreshes the webpack cache, you now need to exit the RN app on the simulator/device, and then relaunch the app. Metro allows you to push `i` or `a` to launch it again.
 
 # Example Project
 
