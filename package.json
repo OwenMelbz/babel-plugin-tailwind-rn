@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-tailwind-rn",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "Allows you to use className='w-full md:w-1/2' syntax in your react native projects.",
   "license": "MIT",
   "repository": "OwenMelbz/babel-plugin-tailwind-rn",
