@@ -1,6 +1,6 @@
 try {
   require('tailwindcss')
-} catch (e) {
+} catch (error) {
   throw new Error(`
     The tailwind-rn plugin requires Tailwind:
     - run 'yarn add tailwindcss'
@@ -8,12 +8,26 @@ try {
   `)
 }
 
-const cssBuilder = require('css')
-const cssToReactNative = require('css-to-react-native').default
 const fs = require('fs')
+const path = require('path')
+const cssBuilder = require('css')
 const postcss = require('postcss')
 const tailwind = require('tailwindcss')
 const config = require('tailwindcss/resolveConfig')
+const cssToReactNative = require('css-to-react-native').default
+
+const twConfig = () => {
+  let extras = {}
+  const customConfig = path.join(process.cwd(), 'tailwind.config.js')
+
+  if (fs.existsSync(customConfig)) {
+    extras = require(customConfig)
+  }
+
+  extras.target = 'ie11'
+
+  return config(extras)
+}
 
 /*
  * All this crazy logic belongs to: https://github.com/vadimdemedes/tailwind-rn
@@ -154,10 +168,7 @@ const source = `
 @tailwind utilities;
 `
 
-const tailwindConfig = config()
-tailwindConfig.target = 'ie11'
-
-postcss([tailwind(tailwindConfig)])
+postcss([tailwind(twConfig())])
   .process(source, { from: undefined })
   .then(({ css }) => {
     const styles = build(css)

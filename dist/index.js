@@ -8,21 +8,35 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 try {
   require('tailwindcss');
-} catch (e) {
+} catch (error) {
   throw new Error("\n    The tailwind-rn plugin requires Tailwind:\n    - run 'yarn add tailwindcss'\n    - restart metro with '--reset-cache'\n  ");
 }
 
-var cssBuilder = require('css');
-
-var cssToReactNative = require('css-to-react-native')["default"];
-
 var fs = require('fs');
+
+var path = require('path');
+
+var cssBuilder = require('css');
 
 var postcss = require('postcss');
 
 var tailwind = require('tailwindcss');
 
 var config = require('tailwindcss/resolveConfig');
+
+var cssToReactNative = require('css-to-react-native')["default"];
+
+var twConfig = function twConfig() {
+  var extras = {};
+  var customConfig = path.join(process.cwd(), 'tailwind.config.js');
+
+  if (fs.existsSync(customConfig)) {
+    extras = require(customConfig);
+  }
+
+  extras.target = 'ie11';
+  return config(extras);
+};
 /*
  * All this crazy logic belongs to: https://github.com/vadimdemedes/tailwind-rn
  */
@@ -168,9 +182,7 @@ var build = function build(source) {
 
 
 var source = "\n@tailwind base;\n@tailwind components;\n@tailwind utilities;\n";
-var tailwindConfig = config();
-tailwindConfig.target = 'ie11';
-postcss([tailwind(tailwindConfig)]).process(source, {
+postcss([tailwind(twConfig())]).process(source, {
   from: undefined
 }).then(function (_ref3) {
   var css = _ref3.css;
