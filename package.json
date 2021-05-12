@@ -32,7 +32,7 @@
     "eslint": "^7.1.0",
     "eslint-config-precure": "^5.4.0",
     "flow-bin": "^0.126.1",
-    "postcss": "^7.0.32",
+    "postcss": "^8.2.10",
     "prettier": "^2.0.5",
     "react": "^16.13.1",
     "react-native": "^0.62.2",
